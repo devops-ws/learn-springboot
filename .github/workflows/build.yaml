@@ -1,0 +1,26 @@
+name: Build
+
+on:
+  - pull_request_target
+
+permissions:
+  contents: read
+
+jobs:
+  Build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Image
+        run: make build-image
+      - name: Run e2e
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PULL_REQUEST: ${{ github.event.number }}
+        run: |
+          sudo curl -L https://github.com/docker/compose/releases/download/v2.23.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+          sudo chmod u+x /usr/local/bin/docker-compose
+          export OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')
+          make test-e2e
