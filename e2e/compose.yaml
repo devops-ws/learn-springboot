@@ -1,0 +1,25 @@
+version: '3.1'
+services:
+  testing:
+    build:
+      context: .
+    environment:
+      SERVER: http://server:8080
+      OWNER: "$OWNER"
+      GITHUB_TOKEN: "$GITHUB_TOKEN"
+      PULL_REQUEST: "$PULL_REQUEST"
+    depends_on:
+      server:
+        condition: service_healthy
+    links:
+      - server
+  server:
+    image: ghcr.io/devops-ws/learn-springboot:master
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: ["CMD", "bash", "-c", "cat < /dev/null > /dev/tcp/127.0.0.1/8080"]
+      interval: 3s
+      timeout: 60s
+      retries: 10
+      start_period: 3s
