@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class StringService {
     @GetMapping("/lower")
     public String lower(@RequestParam(required = true) String text) {
-        return text.toLowerCase();
+        return text;
     }
 }
