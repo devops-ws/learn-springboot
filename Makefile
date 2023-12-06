@@ -4,3 +4,11 @@ test-e2e:
 	cd e2e && ./start.sh
 run-demo:
 	cd e2e && docker compose up server
+
+local-test:
+	atest run -p e2e/test-suite.yaml
+
+init-env:
+	curl https://linuxsuren.github.io/tools/install.sh|bash
+	hd i cli/cli
+	hd i atest

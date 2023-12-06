@@ -10,11 +10,15 @@ items:
 - name: toLowerWithoutParam
   request:
     api: /lower
+    header:
+      Authorization: Basic YWRtaW46MTIzNDU2
   expect:
     statusCode: 400
 - name: toLower
   request:
     api: /lower?text=Hello
+    header:
+      Authorization: Basic YWRtaW46MTIzNDU2
   expect:
     body: hello
 
@@ -22,5 +26,7 @@ items:
 - name: no-cookie
   request:
     api: /cookies/echo
+    header:
+      Authorization: Basic YWRtaW46MTIzNDU2
   expect:
     body: cookies are empty

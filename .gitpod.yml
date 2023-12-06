@@ -1,3 +1,6 @@
+tasks:
+  - init: make init-env
+
 vscode:
   extensions:
     - linuxsuren.api-testing
