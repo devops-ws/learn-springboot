@@ -17,3 +17,10 @@ items:
     api: /lower?text=Hello
   expect:
     body: hello
+
+## Cookies
+- name: no-cookie
+  request:
+    api: /cookies/echo
+  expect:
+    body: cookies are empty
