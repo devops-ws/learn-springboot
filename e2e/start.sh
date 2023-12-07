@@ -7,7 +7,7 @@ then
 fi
 
 docker-compose version
-docker-compose -f "$file" up --build -d
+docker-compose -f "$file" up --build -d --pull=never
 
 while true
 do
@@ -15,9 +15,10 @@ do
     if [ $? -eq 1 ]
     then
         code=-1
+        docker-compose -f "$file" logs | grep e2e-server
         docker-compose -f "$file" logs | grep e2e-testing
-        docker-compose -f "$file" logs | grep e2e-testing | grep Usage
-        if [ $? -eq 1 ]
+        docker-compose ps -a | grep e2e-testing | grep "Exited (0)"
+        if [ $? -eq 0 ]
         then
             code=0
             echo "successed"
