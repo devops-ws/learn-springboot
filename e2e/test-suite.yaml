@@ -30,3 +30,33 @@ items:
       Authorization: Basic YWRtaW46MTIzNDU2
   expect:
     body: cookies are empty
+
+## GraphQL
+- name: queryBookById
+  request:
+    api: /graphql
+    method: POST
+    header:
+      Content-Type: application/json
+    body: |
+      {
+        "query": "query xxx {\n  bookById(id: \"book-1\") {\n    id\n    name\n  }\n}",
+        "operationName": "xxx"
+      }
+  expect:
+    bodyFieldsExpect:
+      data.bookById.name: Effective Java
+- name: queryBookById-not-found
+  request:
+    api: /graphql
+    method: POST
+    header:
+      Content-Type: application/json
+    body: |
+      {
+        "query": "query xxx {\n  bookById(id: \"book\") {\n    id\n    name\n  }\n}",
+        "operationName": "xxx"
+      }
+  expect:
+    verify:
+      - data.bookById == nil

@@ -7,6 +7,9 @@ Run E2E testing:
 make build-image test-e2e
 ```
 
+## GraphQL
+You can visit it via: http://localhost:8080/graphiql?path=/graphql
+
 ## OpenAPI
 You can visit the swagger UI with the following address:
 

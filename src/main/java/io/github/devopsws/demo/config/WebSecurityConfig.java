@@ -9,16 +9,22 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
+// @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/health", "/v3/api-docs").permitAll()
-                .anyRequest().authenticated()).httpBasic();
+                .requestMatchers("/health", "/v3/api-docs", "/graphql", "/graphiql").permitAll()
+                .anyRequest().authenticated())
+                .httpBasic(withDefaults())
+                .csrf(AbstractHttpConfigurer::disable);
 
         return http.build();
     }
