@@ -5,3 +5,4 @@ vscode:
   extensions:
     - linuxsuren.api-testing
     - vscjava.vscode-maven
+    - redhat.java
