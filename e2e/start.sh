@@ -15,8 +15,8 @@ do
     if [ $? -eq 1 ]
     then
         code=-1
-        docker-compose -f "$file" logs | grep e2e-server
-        docker-compose -f "$file" logs | grep e2e-testing
+        docker-compose -f "$file" logs | grep server
+        docker-compose -f "$file" logs | grep testing
         docker-compose ps -a | grep e2e-testing | grep "Exited (0)"
         if [ $? -eq 0 ]
         then

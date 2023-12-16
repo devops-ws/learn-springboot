@@ -3,6 +3,8 @@
 name: SpringBoot
 api: |
   {{default "http://localhost:8080" (env "SERVER")}}
+param:
+  auth: Basic {{ base64 "admin:123456" }}
 items:
 - name: health
   request:
@@ -11,14 +13,14 @@ items:
   request:
     api: /lower
     header:
-      Authorization: Basic YWRtaW46MTIzNDU2
+      Authorization: "{{ .param.auth }}"
   expect:
     statusCode: 400
 - name: toLower
   request:
     api: /lower?text=Hello
     header:
-      Authorization: Basic YWRtaW46MTIzNDU2
+      Authorization: "{{ .param.auth }}"
   expect:
     body: hello
 
@@ -27,7 +29,7 @@ items:
   request:
     api: /cookies/echo
     header:
-      Authorization: Basic YWRtaW46MTIzNDU2
+      Authorization: "{{ .param.auth }}"
   expect:
     body: cookies are empty
 

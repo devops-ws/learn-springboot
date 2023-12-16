@@ -12,3 +12,5 @@ init-env:
 	curl https://linuxsuren.github.io/tools/install.sh|bash
 	hd i cli/cli
 	hd i atest
+	gh repo fork --remote
+	gh repo set-default devops-ws/learn-springboot
