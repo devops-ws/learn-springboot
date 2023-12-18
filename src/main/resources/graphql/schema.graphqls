@@ -1,5 +1,10 @@
 type Query {
     bookById(id: ID): Book
+    books: [Book]
+}
+
+type Mutation {
+    addBook(name: String, pageCount: Int!): Int
 }
 
 type Book {
