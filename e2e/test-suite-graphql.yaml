@@ -1,0 +1,61 @@
+#!api-testing
+# yaml-language-server: $schema=https://linuxsuren.github.io/api-testing/api-testing-schema.json
+name: SpringBoot
+api: |
+  {{default "http://localhost:8080" (env "SERVER")}}
+spec:
+  kind: GraphQL
+items:
+- name: queryBookById
+  request:
+    api: /graphql
+    body:
+      query: |
+        query xxx($id: ID) {
+          bookById(id: $id) {
+            name
+          }
+        }
+      operationName: xxx
+      variables:
+        id: book-1
+  expect:
+    bodyFieldsExpect:
+      data.bookById.name: Effective Java
+- name: allBooks
+  request:
+    api: /graphql
+    body:
+      query: |
+        query xxx {
+          books {
+            name
+          }
+        }
+  expect:
+    verify:
+      - len(data.data.books) >= 3
+- name: queryBookById-not-found
+  request:
+    api: /graphql
+    body:
+      query: |
+        query xxx {
+          bookById(id: "book") {
+            name
+          }
+        }
+  expect:
+    verify:
+      - data.bookById == nil
+- name: addBook
+  request:
+    api: /graphql
+    body:
+      query: |
+        mutation size {
+          addBook(
+            name: "name"
+            pageCount: 1
+          )
+        }
