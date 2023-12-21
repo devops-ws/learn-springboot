@@ -3,6 +3,7 @@ set -e
 
 mkdir -p /var/data
 
+atest run -p test-suite-graphql.yaml
 atest run -p test-suite.yaml --report md --swagger-url "${SERVER}/v3/api-docs" --level debug
 
 # cannot get the token in a pr
