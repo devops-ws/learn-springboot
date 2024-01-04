@@ -13,9 +13,12 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>
+	
 	<properties>
 		<java.version>17</java.version>
+        <trpc-maven-plugin.version>1.0.0</trpc-maven-plugin.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -39,6 +42,12 @@
 		</dependency>
 
 		<dependency>
+            <groupId>com.tencent.trpc</groupId>
+            <artifactId>trpc-mini</artifactId>
+			<version>1.1.0</version>
+        </dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
@@ -51,6 +60,21 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+            <plugin>
+                <groupId>com.tencent.trpc</groupId>
+                <artifactId>trpc-maven-plugin</artifactId>
+                <version>${trpc-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>gen-code</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <attachGeneratedFiles>true</attachGeneratedFiles>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 
