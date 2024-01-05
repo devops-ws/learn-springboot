@@ -4,7 +4,8 @@ test-e2e:
 	cd e2e && ./start.sh
 run-demo:
 	cd e2e && docker compose up server
-
+run:
+	mvn package && java -jar target/demo-0.0.1-SNAPSHOT.jar
 local-test:
 	atest run -p e2e/test-suite.yaml
 

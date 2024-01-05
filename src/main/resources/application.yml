@@ -1,0 +1,21 @@
+# https://spring.io/guides/gs/graphql-server/
+spring:
+  graphql:
+    graphiql:
+      enabled: true
+
+server:
+  port: 8080
+
+trpc:
+  server:
+    app: TestApp          # App name
+    server: TestServer    # Server name
+    local_ip: 0.0.0.0   # Local ip
+    service: # Service list
+      - name: trpc.TestApp.TestServer.Greeter1  # Service name
+        impls: # Service implement classes
+          - io.github.devopsws.demo.service.TRPCService
+        ip: 0.0.0.0     # Listen ip
+        port: 9090       # Listen port
+        network: tcp      # Network type, tcp or udp
