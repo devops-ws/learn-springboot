@@ -9,6 +9,14 @@ items:
 - name: health
   request:
     api: /health
+- name: healthJson
+  request:
+    api: /health.json
+    header:
+      Authorization: "{{ .param.auth }}"
+  expect:
+    body: |
+      {"message":"OK"}
 - name: toLowerWithoutParam
   request:
     api: /lower

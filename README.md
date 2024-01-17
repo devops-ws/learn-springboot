@@ -7,6 +7,11 @@ Run E2E testing:
 make build-image test-e2e
 ```
 
+## OpenAPI definition
+You can visit it via: http://localhost:8080/v3/api-docs
+
+or visit Swagger UI via: http://localhost:8080/swagger-ui/index.html
+
 ## GraphQL
 You can visit it via: http://localhost:8080/graphiql?path=/graphql
 
