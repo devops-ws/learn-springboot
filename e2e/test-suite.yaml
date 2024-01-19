@@ -33,6 +33,30 @@ items:
       Authorization: "{{ .param.auth }}"
   expect:
     body: hello
+- name: repeat
+  request:
+    api: /repeat/3
+    query:
+      text: a
+    header:
+      Authorization: "{{ .param.auth }}"
+  expect:
+    body:
+      aaa
+- name: base64
+  request:
+    api: /base64
+    method: POST
+    body: |
+      {
+        "message":"OK"
+      }
+    header:
+      Authorization: "{{ .param.auth }}"
+      Content-Type: application/json
+  expect:
+    bodyFieldsExpect:
+      message: T0s=
 
 ## Cookies
 - name: no-cookie
