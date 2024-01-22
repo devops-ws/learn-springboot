@@ -21,7 +21,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
-                .requestMatchers("/health", "/v3/api-docs", "/graphql", "/graphiql").permitAll()
+                .requestMatchers("/health", "/v3/api-docs/**", "/swagger-ui/*", "/graphql", "/graphiql").permitAll()
                 .anyRequest().authenticated())
                 .httpBasic(withDefaults())
                 .csrf(AbstractHttpConfigurer::disable);
