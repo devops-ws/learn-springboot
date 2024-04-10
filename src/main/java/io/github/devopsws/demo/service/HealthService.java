@@ -11,8 +11,9 @@ public class HealthService {
 		return "OK";
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@GetMapping("/health.json")
-	public Message healthJSON() {
+	public Message<?> healthJSON() {
 		return new Message("OK");
 	}
 }

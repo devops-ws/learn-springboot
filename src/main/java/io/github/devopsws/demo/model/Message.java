@@ -1,7 +1,10 @@
 package io.github.devopsws.demo.model;
 
-public class Message {
+import java.util.List;
+
+public class Message<T> {
     private String message;
+    private List<T> data;
 
     // avoid the following error
     // JSON parse error: Cannot construct instance of
@@ -17,5 +20,13 @@ public class Message {
 
     public void setMessage(String message) {
         this.message=message;
+    }
+
+    public List<T> getData() {
+        return this.data;
+    }
+
+    public void setData(List<T> data) {
+        this.data = data;
     }
 }
