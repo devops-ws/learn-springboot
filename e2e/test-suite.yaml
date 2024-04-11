@@ -16,7 +16,7 @@ items:
       Authorization: "{{ .param.auth }}"
   expect:
     body: |
-      {"message":"OK"}
+      {"message":"OK","data":null}
 - name: toLowerWithoutParam
   request:
     api: /lower
@@ -65,4 +65,17 @@ items:
     header:
       Authorization: "{{ .param.auth }}"
   expect:
-    body: cookies are empty
+    bodyFieldsExpect:
+      message: cookies are empty
+- name: have-cookie
+  request:
+    api: /cookies/echo
+    query:
+      name: name
+    header:
+      Authorization: "{{ .param.auth }}"
+    cookie:
+      name: rick
+  expect:
+    bodyFieldsExpect:
+      message: rick
