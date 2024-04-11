@@ -57,8 +57,23 @@ items:
   expect:
     bodyFieldsExpect:
       message: T0s=
+- name: echo
+  request:
+    api: /echo
+    method: POST
+    body: |
+      {
+        "name": "rick",
+        "age": 18
+      }
+    header:
+      Authorization: "{{ .param.auth }}"
+      Content-Type: application/json
+  expect:
+    body: |
+      {"name":"rick","age":18}
 
-## Cookies
+  ## Cookies
 - name: no-cookie
   request:
     api: /cookies/echo

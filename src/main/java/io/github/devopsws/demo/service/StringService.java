@@ -33,4 +33,9 @@ public class StringService {
         message.setMessage(encodedString);
         return message;
     }
+
+    @PostMapping("/echo")
+    public Object echo(@RequestBody Object payload) {
+        return payload;
+    }
 }
