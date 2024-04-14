@@ -66,7 +66,7 @@
                 <version>${trpc-maven-plugin.version}</version>
                 <executions>
                     <execution>
-						<phase>validate</phase>
+			<phase>validate</phase>
                         <goals>
                             <goal>gen-code</goal>
                         </goals>
