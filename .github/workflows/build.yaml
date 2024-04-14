@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
+      - name: Maven Package
+        run: mvn package
       - name: Image
         run: make build-image
       - name: Run e2e
