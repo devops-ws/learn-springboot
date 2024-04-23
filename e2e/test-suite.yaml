@@ -94,3 +94,8 @@ items:
   expect:
     bodyFieldsExpect:
       message: rick
+- name: prometheus
+  request:
+    api: /actuator/prometheus
+    header:
+      Authorization: "{{ .param.auth }}"

@@ -19,3 +19,13 @@ trpc:
         ip: 0.0.0.0     # Listen ip
         port: 9090       # Listen port
         network: tcp      # Network type, tcp or udp
+
+# https://spring.academy/guides/spring-spring-prometheus
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}

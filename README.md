@@ -7,6 +7,12 @@ Run E2E testing:
 make build-image test-e2e
 ```
 
+Run with Maven command:
+
+```shell
+mvn spring-boot:run
+```
+
 ## OpenAPI definition
 You can visit it via: http://localhost:8080/v3/api-docs
 
@@ -17,3 +23,6 @@ You can visit it via: http://localhost:8080/graphiql?path=/graphql
 
 ## tRPC
 The [tRPC](https://github.com/trpc-group/trpc-java) endpoint is: `http://localhost:9090`
+
+## Metrics
+You can visit the metrics endpoint: `/actuator/prometheus`
