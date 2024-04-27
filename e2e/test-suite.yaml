@@ -72,6 +72,17 @@ items:
   expect:
     body: |
       {"name":"rick","age":18}
+- name: big
+  request:
+    api: /big
+    query:
+      size: "1"
+    header:
+      Authorization: "{{ .param.auth }}"
+      Content-Type: application/json
+  expect:
+    body: |
+      {"message":"m","data":null}
 
   ## Cookies
 - name: no-cookie
