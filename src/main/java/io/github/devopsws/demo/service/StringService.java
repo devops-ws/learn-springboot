@@ -51,6 +51,6 @@ public class StringService {
             }
         }
         msg.setMessage(buf.toString());
-        return payload;
+        return msg;
     }
 }
