@@ -38,4 +38,19 @@ public class StringService {
     public Object echo(@RequestBody Object payload) {
         return payload;
     }
+
+    @GetMapping("/big")
+    public Message big(@RequestParam(required = true) int size) {
+        Message msg = new Message();
+        StringBuffer buf = new StringBuffer();
+        if (size < 0) {
+            buf.append("size needs to be positive");
+        } else {
+            for (int i = 0; i < size; i++) {
+                buf.append("m");
+            }
+        }
+        msg.setMessage(buf.toString());
+        return payload;
+    }
 }
