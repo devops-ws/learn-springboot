@@ -92,7 +92,7 @@ items:
       Authorization: "{{ .param.auth }}"
   expect:
     bodyFieldsExpect:
-      message: cookies are empty
+      message: not found
 - name: have-cookie
   request:
     api: /cookies/echo
