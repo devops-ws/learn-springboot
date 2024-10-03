@@ -13,6 +13,11 @@ Run with Maven command:
 mvn spring-boot:run
 ```
 
+Change the listen port:
+```shell
+java -jar demo.jar --server.port=8081
+```
+
 ## OpenAPI definition
 You can visit it via: http://localhost:8080/v3/api-docs
 
