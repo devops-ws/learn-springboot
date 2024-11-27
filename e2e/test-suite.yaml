@@ -110,3 +110,13 @@ items:
     api: /actuator/prometheus
     header:
       Authorization: "{{ .param.auth }}"
+
+## files
+- name: downloadFile
+  request:
+    api: /file/download
+    header:
+      Authorization: "{{ .param.auth }}"
+  expect:
+    header:
+      Content-Type: application/octet-stream
