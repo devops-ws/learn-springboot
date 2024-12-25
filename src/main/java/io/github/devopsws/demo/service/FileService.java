@@ -2,6 +2,8 @@ package io.github.devopsws.demo.service;
 
 import java.io.FileOutputStream;
 
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -48,6 +50,28 @@ public class FileService {
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                    .body(resource);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/download/custom")
+    public ResponseEntity<Resource> downloadCustomFile(@RequestParam(required = false) String filename,
+                                                       @RequestParam(required = false) Integer size) {
+        if (StringUtils.isBlank(filename)) {
+            filename = "test.log";
+        }
+        if (size == null || size <= 0) {
+            size = 1024;
+        }
+
+        Resource resource = new ByteArrayResource(new byte[size]);
+        if (resource.exists() || resource.isReadable()) {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .header(HttpHeaders.CONTENT_LENGTH, String.valueOf(size))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"")
                     .body(resource);
         } else {
             return ResponseEntity.notFound().build();
