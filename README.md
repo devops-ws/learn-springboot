@@ -4,7 +4,7 @@ This project aims to verify [linuxsuren/api-testing](https://github.com/LinuxSuR
 Run E2E testing:
 
 ```shell
-make build-image test-e2e
+make build-image run-e2e
 ```
 
 Run with Maven command:
