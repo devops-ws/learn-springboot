@@ -5,6 +5,8 @@ api: |
   {{default "http://localhost:8080" (env "SERVER")}}
 param:
   auth: Basic {{ base64 "admin:123456" }}
+  randNum: |
+    {{randInt 1 1000}}
 items:
 - name: health
   request:
@@ -120,3 +122,13 @@ items:
   expect:
     header:
       Content-Type: application/octet-stream
+
+## cache
+- name: cache
+  request:
+    api: /cache?delay={{ .param.randNum }}
+    header:
+      Authorization: "{{ .param.auth }}"
+  expect:
+    bodyFieldsExpect:
+      pageCount: "{{ .param.randNum }}"

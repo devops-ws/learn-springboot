@@ -26,4 +26,4 @@ jobs:
           sudo curl -L https://github.com/docker/compose/releases/download/v2.23.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
           export OWNER=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]')
-          make test-e2e
+          make run-e2e
