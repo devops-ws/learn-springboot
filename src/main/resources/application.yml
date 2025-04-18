@@ -1,11 +1,56 @@
 # https://spring.io/guides/gs/graphql-server/
 spring:
+  application:
+    name: learn-springboot
   graphql:
     graphiql:
       enabled: true
+  cloud:
+    discovery:
+      enabled: true
+    loadbalancer:
+      hint-header-name: ${DEV_MODE:dev}
+      zone: ${DEV_MODE:dev}
+    nacos:
+      discovery:
+        metadata:
+          ephemeral: false
 
 server:
   port: 8080
+
+nacos:
+  discovery:
+    auto-register: ${nacos.server.enabled:false}
+    register:
+      enabled: ${nacos.server.enabled:false}
+    server-addr: ${nacos.server-addr:127.0.0.1:8848}
+  client:
+    grpc:
+      enable: false
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: ${server.ip:127.0.0.1}
+    non-secure-port: ${server.port:8080}
+    hostname: ${server.ip:127.0.0.1}
+    instance-id: ${server.ip:127.0.0.1}:${spring.application.name}:${server.port:8080}
+    metadata-map:
+      hint: ${DEV_MODE:dev}
+      zone: ${DEV_MODE:dev}
+    health-check-url-path: /actuator/health
+    status-page-url-path: /actuator/info
+    home-page-url-path: /actuator/info
+
+  client:
+    enabled: ${EUREKA_ENABLED:false}
+    fetch-registry: true
+    register-with-eureka: true
+    healthcheck:
+      enabled: true
+    service-url:
+      defaultZone: ${EUREKA_URL:http://127.0.0.1:17001/eureka}
 
 trpc:
   server:
@@ -17,7 +62,7 @@ trpc:
         impls: # Service implement classes
           - io.github.devopsws.demo.service.TRPCService
         ip: 0.0.0.0     # Listen ip
-        port: 9090       # Listen port
+        port: ${trpc.server.port:9090}       # Listen port
         network: tcp      # Network type, tcp or udp
 
 # https://spring.academy/guides/spring-spring-prometheus
@@ -29,3 +74,10 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
+
+logging:
+  level:
+    root: info
+    org.springframework.web: info
+    org.springframework.cloud: info
+    org.springframework.cloud.netflix.eureka: debug

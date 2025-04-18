@@ -26,6 +26,19 @@ java -jar demo.jar --server.port=8081
 
 The default username is `admin`, and password is: `123456`.
 
+## Service Registry Center
+
+This project can register itself to the service registry center.
+
+### Nacos
+
+Register to [Nacos](https://github.com/alibaba/nacos):
+
+```shell
+java -jar demo.jar --nacos.server.enabled=true \
+  --nacos.server-addr=192.168.10.52:8448
+```
+
 ## OpenAPI definition
 You can visit it via: http://localhost:8080/v3/api-docs
 

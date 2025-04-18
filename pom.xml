@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.0</version>
+		<version>3.4.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>io.github.devops-ws</groupId>
@@ -17,6 +17,9 @@
 	<properties>
 		<java.version>17</java.version>
         <trpc-maven-plugin.version>1.0.0</trpc-maven-plugin.version>
+		<nacos.version>0.3.0-RC</nacos.version>
+		<spring-cloud.version>2024.0.1</spring-cloud.version>
+		<spring-boot.version>3.4.4</spring-boot.version>
 	</properties>
 
 	<dependencies>
@@ -36,6 +39,39 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+			<version>3.1.8</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba.boot</groupId>
+			<artifactId>nacos-config-spring-boot-starter</artifactId>
+			<version>${nacos.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.boot</groupId>
+			<artifactId>nacos-config-spring-boot-actuator</artifactId>
+			<version>${nacos.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba.boot</groupId>
+			<artifactId>nacos-discovery-spring-boot-starter</artifactId>
+			<version>${nacos.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba.boot</groupId>
+			<artifactId>nacos-discovery-spring-boot-actuator</artifactId>
+			<version>${nacos.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>2.2.0</version>
@@ -47,10 +83,6 @@
 			<version>1.1.0</version>
         </dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>
@@ -66,6 +98,22 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</path>
+						<path>
+							<groupId>org.springframework.boot</groupId>
+							<artifactId>spring-boot-configuration-processor</artifactId>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
@@ -75,7 +123,7 @@
                 <version>${trpc-maven-plugin.version}</version>
                 <executions>
                     <execution>
-			<phase>validate</phase>
+						<phase>validate</phase>
                         <goals>
                             <goal>gen-code</goal>
                         </goals>
